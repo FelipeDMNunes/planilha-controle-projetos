@@ -1,0 +1,122 @@
+import React, { useMemo } from "react";
+import { motion } from "framer-motion";
+import { Check, BarChart3, ChartPie, CalendarCheck2, Shield, ArrowRight, Crown } from "lucide-react";
+
+const GlowButton = ({ label, icon, className = "", ...props }) => (
+  <button
+    {...props}
+    className={`group relative inline-flex items-center gap-2 rounded-2xl px-5 py-3 font-semibold text-white bg-gradient-to-b from-blue-600 to-blue-700 shadow-lg shadow-blue-700/40 hover:shadow-blue-500/50 hover:scale-[1.02] ring-1 ring-inset ring-blue-400/40 ${className}`}
+  >
+    <span className="absolute -inset-px rounded-2xl bg-[radial-gradient(120px_80px_at_0%_0%,rgba(59,130,246,.4),transparent_50%),radial-gradient(120px_80px_at_100%_100%,rgba(59,130,246,.4),transparent_50%)] opacity-0 transition-opacity duration-300 group-hover:opacity-100" />
+    <span className="relative flex items-center gap-2">
+      {icon}
+      <span>{label}</span>
+    </span>
+  </button>
+);
+
+export default function Page() {
+  const sectionClass = "mx-auto w-full max-w-7xl px-4 sm:px-6 lg:px-8";
+
+  const features = useMemo(() => ([
+    { icon: <BarChart3 className="h-5 w-5" />, title: "Dashboard automático", desc: "Gráficos e KPIs atualizados automaticamente conforme o uso." },
+    { icon: <ChartPie className="h-5 w-5" />, title: "Indicadores visuais", desc: "Cores de status, barras de progresso e alertas visuais de atraso." },
+    { icon: <CalendarCheck2 className="h-5 w-5" />, title: "Prazos & progresso", desc: "Controle de tempo e acompanhamento fácil de metas." },
+    { icon: <Shield className="h-5 w-5" />, title: "Interface intuitiva", desc: "Organização clara e responsiva em qualquer dispositivo." },
+  ]), []);
+
+  const faq = [
+    { q: "Funciona no Excel PT-BR?", a: "Sim. Totalmente compatível com as versões mais recentes do Excel em português." },
+    { q: "Tem versão para celular?", a: "O site é 100% responsivo e a planilha pode ser usada via Excel Mobile." },
+    { q: "Posso personalizar cores e categorias?", a: "Sim — você pode editar as listas e os estilos livremente." },
+    { q: "Como recebo a planilha?", a: "Ao clicar em Baixar, você recebe um arquivo .xlsx pronto para uso." }
+  ];
+
+  return (
+    <div>
+      <div className="min-h-screen bg-slate-900 text-slate-100 transition-colors duration-300">
+        <header className="sticky top-0 z-30 backdrop-blur supports-[backdrop-filter]:bg-slate-900/60">
+          <div className={`${sectionClass} flex items-center justify-between py-4`}>
+            <div />
+            <div className="hidden items-center gap-4 md:flex">
+              <a href="#features" className="text-sm text-slate-300 hover:text-white">Recursos</a>
+              <a href="#preco" className="text-sm text-slate-300 hover:text-white">Preço</a>
+              <a href="#faq" className="text-sm text-slate-300 hover:text-white">FAQ</a>
+            </div>
+          </div>
+        </header>
+
+        <section className={`${sectionClass} pt-10 pb-14 sm:pt-16`}> 
+          <div className="grid items-center gap-10 md:grid-cols-2">
+            <div>
+              <motion.h1
+                initial={{ y: 20, opacity: 0 }}
+                animate={{ y: 0, opacity: 1 }}
+                transition={{ duration: 0.5 }}
+                className="text-4xl font-black tracking-tight sm:text-5xl"
+              >
+                Controle de Projetos
+                <span className="block text-transparent bg-clip-text bg-gradient-to-r from-blue-400 to-blue-600">com eficiência e estilo</span>
+              </motion.h1>
+              <p className="mt-4 max-w-prose text-lg text-slate-300">
+                Gerencie prazos, progresso e status de forma clara e visual. Uma planilha feita para produtividade e estética.
+              </p>
+              <div className="mt-6 flex flex-wrap items-center gap-3">
+                <GlowButton label="Baixar Planilha" icon={<ArrowRight className="h-4 w-4" />} />
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="features" className={`${sectionClass} pb-6`}>
+          <h2 className="text-2xl font-bold text-white">Por que essa planilha funciona</h2>
+          <div className="mt-6 grid gap-4 sm:grid-cols-2 lg:grid-cols-4">
+            {features.map((f, i) => (
+              <div key={i} className="group relative rounded-2xl p-6 backdrop-blur-sm ring-1 ring-inset ring-slate-700/70 bg-slate-800/70 shadow-sm transition-transform hover:translate-y-[-2px]">
+                <div className="mb-4 inline-flex items-center justify-center rounded-xl bg-gradient-to-b from-blue-500 to-blue-600 p-2 text-white shadow-md">{f.icon}</div>
+                <h3 className="text-lg font-semibold text-white">{f.title}</h3>
+                <p className="mt-2 text-slate-400">{f.desc}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <section id="preco" className={`${sectionClass} py-12`}>
+          <div className="relative rounded-3xl p-6 ring-1 ring-inset ring-amber-400/40 shadow-xl shadow-amber-500/20 bg-slate-800/90">
+            <span className="absolute -top-3 right-4 inline-flex items-center gap-1 rounded-full bg-gradient-to-r from-amber-300 to-yellow-400 px-3 py-1 text-xs font-semibold text-slate-900 shadow">
+              <Crown className="h-3.5 w-3.5" /> Produto Premium
+            </span>
+            <h3 className="text-lg font-semibold text-white">Plano único</h3>
+            <div className="mt-3 text-4xl font-bold text-white">R$ 24,90</div>
+            <div className="mt-1 text-sm text-amber-300/90">Qualidade profissional • Design refinado • Atualizações incluídas</div>
+            <ul className="mt-4 space-y-2 text-slate-300">
+              <li className="flex items-center gap-2"><Check className="h-4 w-4 text-amber-300" />Dashboard completo</li>
+              <li className="flex items-center gap-2"><Check className="h-4 w-4 text-amber-300" />KPIs + gráficos</li>
+              <li className="flex items-center gap-2"><Check className="h-4 w-4 text-amber-300" />Progresso automático</li>
+            </ul>
+            <GlowButton label="Baixar Planilha" className="mt-6 w-full justify-center" />
+          </div>
+        </section>
+
+        <section id="faq" className={`${sectionClass} py-12`}>
+          <h2 className="text-2xl font-bold text-white">Perguntas frequentes</h2>
+          <div className="mt-6 grid gap-4 md:grid-cols-2">
+            {faq.map((item, i) => (
+              <div key={i} className="rounded-2xl p-6 ring-1 ring-inset ring-slate-700/70 bg-slate-800/70 shadow-sm">
+                <div className="font-semibold text-white">{item.q}</div>
+                <p className="mt-2 text-slate-400">{item.a}</p>
+              </div>
+            ))}
+          </div>
+        </section>
+
+        <footer className="mt-10 border-t border-slate-800/70">
+          <div className={`${sectionClass} flex flex-col items-center justify-between gap-4 py-8 sm:flex-row`}>
+            <div className="text-sm text-slate-500">Felipe Planilhas — © 2025. Todos os direitos reservados.</div>
+            <GlowButton label="Baixar Planilha" />
+          </div>
+        </footer>
+      </div>
+    </div>
+  );
+}
